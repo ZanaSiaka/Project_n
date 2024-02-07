@@ -1,0 +1,160 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+nav{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 13px;
+    align-items: center;
+    box-shadow: rgba(17,17,26,0.1) 0 3px 2px;
+    margin-bottom: 5%;
+}
+nav ul{
+    list-style-type: none;
+    display: flex;
+    position: relative;
+    left: 7%;
+}
+nav ul li{
+    position: relative;
+    left: 18%;
+    margin-right: 15%;
+    top: 8%;
+    justify-content: space-around;
+}
+nav ul li a{
+    color: #2976bc;
+    font-size: larger;
+    text-decoration: none;
+}
+nav input{
+    height: 1px;
+    width: 170%;
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 5%;
+    padding: 13px;
+    font-size: large;
+    outline: none;
+    border: solid 1px #3b67ae;
+}
+nav img{
+    width: 18%;
+    display: flex;
+    position: relative;
+    right: 18%;
+    bottom: 50%;
+
+}
+p{
+    text-align: center;
+    position:relative;
+    left: 0;
+}
+strong{
+    color: black;
+}
+.te{
+    width: 46%;
+    display: flex;
+    position: relative;
+    right:4%;
+}
+.ok{
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.ee{
+    width: 30%;
+    height: 30%;
+    display: flex;
+    position: relative;
+    margin-top: -5%;
+}
+.blu{
+
+}
+.petit1{
+    color: #2976bc;
+    border-radius: 8px;
+    height: 550px;
+    width: 45%;
+    position: relative;
+    left: 28%;
+    top: 3.5%;
+    text-align: center;
+    font-size: 1.8em;
+}
+
+.toi{
+    position: relative;
+    top: 50px;
+}
+.connect{
+    width: 200px;
+    height: 30px;
+    background-color: #2976bc;
+    border: none;
+    border-radius: 10px;
+}
+
+.oki{
+    display: grid;
+    grid-template-columns: repeat(4, 20px);
+    justify-content: space-around;
+    justify-items: center;
+}
+
+.article{
+    width: 300px;
+    height: 350px;
+    border: solid 1px #3b67ae;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    margin-bottom: 100%;
+}
+
+.article img{
+    width: 200px;
+    height: 60%;
+
+}
+
+.article .art-bas{
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border: #3b67ae solid 1px;
+    align-items: center;
+}
+
+.article .art-bas .ok{
+    width: 60%;
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+}
+
+.article .art-bas a{
+    width:40%;
+    color: white;
+}
+
+.article .art-bas a button{
+    background-color: #3b67ae;
+    color: white;
+    height: 40px;
+    width: 100%;
+    border: none;
+    border-radius: 14px;
+}

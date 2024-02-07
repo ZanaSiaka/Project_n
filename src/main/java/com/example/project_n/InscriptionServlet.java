@@ -14,10 +14,9 @@ import java.sql.SQLException;
 
 
 @WebServlet(value = "/InscriptionServlet")
-abstract
-class InscriptionServlet extends HttpServlet {
+public class InscriptionServlet extends HttpServlet {
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // Récupérer les paramètres du formulaire
         String nomClient = request.getParameter("NomClient");
         String prenClient = request.getParameter("PrenClient");

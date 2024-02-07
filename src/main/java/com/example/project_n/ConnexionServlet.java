@@ -1,68 +1,58 @@
 package com.example.project_n;
 
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.*;
-
-
-import org.mindrot.jbcrypt.BCrypt; // Import de la classe BCrypt
 
 @WebServlet("/ConnexionServlet")
 public class ConnexionServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
-        String email = request.getParameter("MailClient");
-        String password = request.getParameter("MotDePasse");
+    private static final long serialVersionUID = 1L;
 
-        // Informations pour la connexion à la base de données (exemple)
-        String jdbcUrl = "jdbc:oracle:thin:@//localhost:1521/xepdb1";
-        String dbUser = "hr";
-        String dbPassword = "hr";
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        PrintWriter out = response.getWriter();
+        out.println("<html><body>");
 
         try {
-            // Établir la connexion à la base de données
-            Connection connection = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);
+            // Charger le pilote JDBC Oracle
+            Class.forName("oracle.jdbc.driver.OracleDriver");
 
-            // Préparer la requête pour récupérer le mot de passe haché en fonction de l'email
-            String query = "SELECT \"MotDePasse\" FROM CLIENT WHERE \"MailClient\" = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, email);
+            // Établir la connexion à la base de données Oracle
+            Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xepdb1", "hr", "hr");
+
+            // Écrire la requête SQL
+            String query = "SELECT * FROM CLIENT WHERE MailClient=? AND MotDePasse=?";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
 
             // Exécuter la requête
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet rs = pstmt.executeQuery();
 
-            if (resultSet.next()) {
-                // Si l'email existe, récupérer le mot de passe haché depuis la base de données
-                String hashedPasswordFromDB = ((ResultSet) resultSet).getString("MotDePasse");
-
-                // Vérification du mot de passe avec BCrypt
-                if (BCrypt.checkpw(password, hashedPasswordFromDB)) {
-                    // Authentification réussie
-                    // Vous pouvez rediriger vers une page appropriée pour un accès réussi
-                    response.sendRedirect("index.jsp");
-                } else {
-                    // Authentification échouée - Mot de passe incorrect
-                    response.sendRedirect("connexion.jsp");
-                }
+            // Vérifier si l'utilisateur existe
+            if (rs.next()) {
+                out.println("<h2>Connexion réussie!</h2>");
             } else {
-                // Authentification échouée - Email non trouvé
-                response.sendRedirect("connexion.jsp");
+                out.println("<h2>Échec de la connexion. Veuillez vérifier vos informations d'identification.</h2>");
             }
 
-            // Fermer les connexions et les ressources
-            resultSet.close();
-            preparedStatement.close();
-            connection.close();
-
-        } catch (SQLException e) {
-            e.printStackTrace(); // Gérer les exceptions appropriées
+            // Fermer les ressources
+            rs.close();
+            pstmt.close();
+            conn.close();
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+            out.println("<h2>Erreur de connexion à la base de données Oracle.</h2>");
         }
-    }
 
+        out.println("</body></html>");
+    }
 }

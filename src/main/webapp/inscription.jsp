@@ -26,6 +26,10 @@
             </div>
         </div>
         <div class="gauche">
+            <% String erreur = (String) request.getAttribute("errorMessage");
+            if(erreur!=null){%>
+            <p> Erreur: <%= erreur%>  </p>
+            <%}%>
             <form action="InscriptionServlet" method="post">
                 <h4>Inscrivez vous sur <mark>EVENTS STORES</mark></h4>
                 <input type="text" placeholder="Nom" name="NomClient">
@@ -33,7 +37,6 @@
                 <input type="email" placeholder="Email" name="MailClient">
                 <input type="number" placeholder="Telephone" minlength="10" maxlength="10" name="TelClient">
                 <input type="password" placeholder="Mot de passe" name="MotDePasse">
-                <input type="password" placeholder="Confirmer mot de passe" name="ConfirmationMotDePasse">
 
                 <div class="boutton">
                     <button type="submit"> S'inscrire </button>

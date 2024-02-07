@@ -26,16 +26,16 @@
     <div class="gauche">
         <form action="ConnexionServlet" method="post">
             <h4>Connecter vous à votre compte </h4>
-            <input type="email" placeholder="Email" name="EmailClient">
-            <input type="password" placeholder="Mot de passe" name="MotDePasse">
+            <input type="email" placeholder="Email" name="MailClient" autocomplete="username">
+            <input type="password" placeholder="Mot de passe" name="motDePasse" autocomplete="current-password">
             <div class="lien">
-                <a href="modif.html">Mot de passe oublié ?</a>
+                <a href="#">Mot de passe oublié ?</a>
             </div>
             <div class="boutton">
                 <button type="submit">Se connecter</button>
             </div>
             <p>Vous n'avez pas encore de compte ? <a href="inscription.jsp">S'inscrire</a></p>
-            <p>Vous n'êtes pas un client ? <a href="Choix.html">Cliquez ici</a></p>
+            <p>Vous n'êtes pas un client ? <a href="AjoutArticle.jsp">Cliquez ici</a></p>
         </form>
     </div>
 </body>
